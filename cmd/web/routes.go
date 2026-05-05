@@ -14,6 +14,8 @@ func router(app *config.AppConfig) http.Handler {
 
 	mux.Use(middleware.Recoverer)
 
+	mux.Use(NoSurf)
+
 	mux.Get("/", handlers.Repo.Home)
 	mux.Get("/about", handlers.Repo.About)
 	return mux
