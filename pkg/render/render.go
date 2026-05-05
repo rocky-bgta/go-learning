@@ -18,6 +18,10 @@ func NewTemplate(a *config.AppConfig) {
 	app = a
 }
 
+func AddDefaultData(td *models.TemplateDate) *models.TemplateDate {
+	return td
+}
+
 // RenderTemplate renders templates using html/template
 func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateDate) {
 
@@ -37,6 +41,8 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateDate)
 	}
 
 	buf := new(bytes.Buffer)
+
+	td = AddDefaultData(td)
 
 	err := t.Execute(buf, td)
 	if err != nil {
